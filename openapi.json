@@ -1,0 +1,428 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Supervisor API",
+    "description": null,
+    "version": "1.0.0",
+    "termsOfService": "",
+    "license": {
+      "name": " ",
+      "url": ""
+    }
+  },
+  "tags": [
+    {
+      "name": "setup",
+      "description": "Methods that have to do with creating a test"
+    },
+    {
+      "name": "manage",
+      "description": "Methods to do with managing existing tests"
+    },
+    {
+      "name": "controls",
+      "description": "Methods used during a test for controlling the bots"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://test.supervisor.com/"
+    }
+  ],
+  "paths": {
+    "/free/verify": {
+      "get": {
+        "tags": [
+          "setup"
+        ],
+        "description": "Adds a website to your panel",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "example.com"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain; charset=utf-8": {
+                "example": {
+                  "value": "(html)"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/start": {
+      "get": {
+        "tags": [
+          "setup"
+        ],
+        "description": "Starts a test on a website",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "example.com"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain; charset=utf-8": {
+                "example": {
+                  "value": "(html)"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/{bot_session_id}/coupons": {
+      "post": {
+        "summary": "Used to apply a coupon code",
+        "tags": [
+          "manage"
+        ],
+        "description": "Applies a coupon",
+        "requestBody": {
+          "description": null,
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "type": "string"
+                  },
+                  "coupon[code]": {
+                    "type": "string"
+                  },
+                  "commit": {
+                    "type": "string",
+                    "example": "Apply"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bot_session_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "TODO"
+          }
+        }
+      }
+    },
+    "/v1/bot_sessions/{bot_session_id}/scale": {
+      "put": {
+        "tags": [
+          "controls"
+        ],
+        "description": "Scales bot amount",
+        "requestBody": {
+          "description": null,
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "replicas": {
+                    "type": "integer"
+                  },
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bot_session_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "TODO"
+          }
+        }
+      }
+    },
+    "/v1/bot_sessions/{bot_session_id}/reset_browsers": {
+      "put": {
+        "tags": [
+          "controls"
+        ],
+        "description": "resets all bots",
+        "requestBody": {
+          "description": null,
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bot_session_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "TODO"
+          }
+        }
+      }
+    },
+    "/v1/bot_sessions/{bot_session_id}/reset_metrics": {
+      "put": {
+        "tags": [
+          "controls"
+        ],
+        "description": "resets metrics data",
+        "requestBody": {
+          "description": null,
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bot_session_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "TODO"
+          }
+        }
+      }
+    },
+    "/v1/bot_sessions/{bot_session_id}/play": {
+      "put": {
+        "tags": [
+          "controls"
+        ],
+        "description": "Sends bot(s) over to target site",
+        "requestBody": {
+          "description": null,
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "rampup_period": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "rampup_users": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "bots_limit": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "useragent": {
+                    "type": "string",
+                    "example": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
+                  },
+                  "errored_bots_threshold": {
+                    "type": "string",
+                    "example": "5"
+                  },
+                  "min_bots_threshold": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "restart_errored_every": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "latency": {
+                    "type": "string",
+                    "example": "25"
+                  },
+                  "download": {
+                    "type": "string",
+                    "example": "25"
+                  },
+                  "upload": {
+                    "type": "string",
+                    "example": "10"
+                  },
+                  "block_google_analytics": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "webcam_video_on": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "webcam_audio_on": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "explore_settings": {
+                    "type": "object",
+                    "properties": {
+                      "max_page_load_seconds": {
+                        "type": "string",
+                        "example": "20"
+                      },
+                      "max_initial_load_seconds": {
+                        "type": "string",
+                        "example": "30"
+                      },
+                      "pages": {
+                        "type": "string",
+                        "example": "15"
+                      },
+                      "view_page_seconds": {
+                        "type": "string",
+                        "example": "5"
+                      },
+                      "whitelist_matcher": {
+                        "type": "string"
+                      },
+                      "blacklist_matcher": {
+                        "type": "string"
+                      },
+                      "initial_load_max": {
+                        "type": "string",
+                        "example": "6"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bot_session_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "TODO"
+          }
+        }
+      }
+    },
+    "/v1/bot_sessions/{bot_session_id}/stop": {
+      "put": {
+        "tags": [
+          "controls"
+        ],
+        "description": "Stops all bots",
+        "requestBody": {
+          "description": null,
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "bot_id": {
+                    "type": "string",
+                    "example": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bot_session_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "TODO"
+          }
+        }
+      }
+    }
+  }
+}
