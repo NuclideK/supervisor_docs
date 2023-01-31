@@ -4,7 +4,7 @@ info:
   termsOfService: ""
   license:
     name: ' '
-    url: ' '
+    url: ''
   version: 1.0.0
 servers:
 - url: http://test.supervisor.com/
