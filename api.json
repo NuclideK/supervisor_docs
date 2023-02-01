@@ -22,6 +22,10 @@
     {
       "name": "controls",
       "description": "Methods used during a test for controlling the bots"
+    },
+    {
+      "name": "nop",
+      "description": "No longer used / operational"
     }
   ],
   "servers": [
@@ -399,6 +403,49 @@
                     "type": "string"
                   },
                   "bot_id": {
+                    "type": "string",
+                    "example": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bot_session_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "TODO"
+          }
+        }
+      }
+    },
+    "/v1/bot_sessions/{bot_session_id}/leader": {
+      "put": {
+        "tags": [
+          "nop"
+        ],
+        "description": "NOP",
+        "requestBody": {
+          "description": null,
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "leader": {
                     "type": "string",
                     "example": null
                   }
